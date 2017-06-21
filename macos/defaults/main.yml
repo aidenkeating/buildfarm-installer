@@ -1,0 +1,26 @@
+---
+# defaults file for macos
+xcode_install_path: /Applications/
+# This is the folder where any stuff can be downloaded to (and deleted from).
+tmp_path: /tmp/
+
+# Put versions of Node here that should be installed by NVM.
+node_versions:
+  - 6
+
+# Put stuff here that can be installed through Rubygems. If a version isn't
+# specified then 'latest' will be installed.
+gem_packages:
+  - name: xcode-install
+    # TODO: Add version here.
+  - name: cocoapods
+    # TODO: Add version here.
+
+# Put stuff here that can be installed through NPM. If a version isn't
+# specified then 'latest' will be installed.
+npm_packages:
+  - name: cordova
+    # TODO: Add version here.
+
+brew_packages:
+  - name: gpg
