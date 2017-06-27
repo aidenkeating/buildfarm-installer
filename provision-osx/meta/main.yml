@@ -6,11 +6,12 @@ galaxy_info:
   license: license (Apache 2)
 
   platforms:
-    - name: macOS
+  - name: provision-osx
 
   galaxy_tags:
-    - digger
-    - macos
-    - mac
+  - digger
+  - macos
+  - osx
+  - mac
 
 dependencies: []

@@ -1,0 +1,27 @@
+---
+
+-
+  name: Install command line tools
+  shell: source ~/.bash_profile && xcversion install-cli-tools
+  args:
+    executable: /bin/bash
+  register: xcode_cli_tools_install
+  failed_when: xcode_cli_tools_install.rc != 1 and xcode_cli_tools_install.stdout.find('already installed') == -1
+  changed_when: xcode_cli_tools_install.stdout.find('already installed') == -1
+  environment:
+    XCODE_INSTALL_USER: "{{ xcode_install_user }}"
+    XCODE_INSTALL_PASSWORD: "{{ xcode_install_password }}"
+    FASTLANE_SESSION: "{{ xcode_install_session_token }} | default(omit)"
+
+-
+  name: Install xcode versions
+  shell: "source /Users/jenkins/.bash_profile && xcversion install {{ item }}"
+  args:
+    executable: /bin/bash
+  with_items: "{{ xcode_versions }}"
+  when: xcode_install_user is defined and xcode_install_password is defined
+  register: xcode_install
+  environment:
+    XCODE_INSTALL_USER: "{{ xcode_install_user }}"
+    XCODE_INSTALL_PASSWORD: "{{ xcode_install_password }}"
+    FASTLANE_SESSION: "{{ xcode_install_session_token }} | default(omit)"
