@@ -37,13 +37,7 @@ homebrew_taps:
 - homebrew/core
 - caskroom/cask
 
-homebrew_cask_appdir: /Applications
-
-homebrew_use_brewfile: true
-homebrew_brewfile_dir: '~'
-
 xcode_install_user:
 xcode_install_password:
-xcode_install_dir: /Applications
 xcode_versions:
 - 8

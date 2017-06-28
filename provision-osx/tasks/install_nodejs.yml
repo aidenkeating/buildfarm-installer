@@ -10,8 +10,10 @@
     https_proxy: "{{ proxy_url | default('') }}"
 
 - 
-  name: Install npm
+  name: Install nvm
   command: "bash {{remote_tmp_path}}/{{nvm_install_file_name}}"
+  register: install_nvm
+  failed_when: install_nvm.rc != 0 and install_nvm.stdout.find('is already installed') == -1
 
 -
   name: Install node versions
