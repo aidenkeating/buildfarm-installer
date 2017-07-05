@@ -6,10 +6,13 @@ Provision Jenkins node for the build farm. This role performs a few tasks, these
 * [Install RVM and Ruby](#install-homebrew)
 * [Install NVM and Node](#install-rvm-and-ruby)
 * [Install Xcode](#install-xcode)
+* [Configure Buildfarm node](#configure-buildfarm-node)
 
 ## Prerequisites
 * SSH access as a user with sudo permissions.
 * `ansible_sudo_pass` variable set when running the job.
+* `xcode_install_user` variable set when running the job, otherwise Xcode tasks will be skipped.
+* `xcode_install_password` variable set when running the job, otherwise Xcode tasks will be skipped.
 
 ## Network access
 The job supports the use of a proxy.
@@ -87,6 +90,16 @@ Ansible job.
 * `xcode_install_session_token` - Apple Developer Account auth cookie from `fastlane spaceauth` command (For accounts with 2FA enabled).
 * `xcode_versions` - A list of Xcode versions to install. These may take over 30 minutes each to install.
 
+
+## Configure Buildfarm node
+Creates a credential set in the build farm for the macOS nodes using the provided keys. Add each machine as a node in the build farm, connecting through SSH.
+
+You will need to create a key pair using a tool such as `ssh-keygen` to allow the Jenkins instance to connect with the macOS nodes.
+
+### Options
+* `credential_private_key_path` - Location of the private key of the pair. This is stored in Jenkins and used to SSH into the macOS node.
+* `credential_passphrase` - Passphrase of the private key. This is stored in Jenkins and used to SSH into the macOS node.
+* `credential_public_key_path` - Location of the public key of the pair.
 
 ## Other options
 * `remote_tmp_dir` - A directory where downloaded scripts and other miscellaneous files can be stored for the duration of the job.

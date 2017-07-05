@@ -1,0 +1,17 @@
+<slave>
+  <name>{{ buildfarm_node_name }}</name>
+  <description>{{ buildfarm_node_description }}</description>
+  <remoteFS>{{ buildfarm_node_root_dir }}</remoteFS>
+  <numExecutors>{{ buildfarm_node_executors }}</numExecutors>
+  <mode>{{ buildfarm_node_mode }}</mode>
+  <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+  <sshHostKeyVerificationStrategy class="hudson.plugins.sshslaves.verifiers.NonVerifyingKeyVerificationStrategy"/>
+  <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+    <host>{{ buildfarm_node_host }}</host>
+    <port>{{ buildfarm_node_port }}</port>
+    <credentialsId>{{ buildfarm_credential_id }}</credentialsId>
+  </launcher>
+  <label>{{ buildfarm_node_labels | join(' ') }}</label>
+  <nodeProperties/>
+  <userId>{{ buildfarm_user_id }}</userId>
+</slave>

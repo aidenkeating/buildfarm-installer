@@ -1,0 +1,40 @@
+---
+
+-
+  debug: msg="{{'8' | int == 8.1}}"
+
+-
+  name: Ensure ansible sudo pass is defined
+  fail: msg="ansible_sudo_pass is undefined"
+  when: ansible_sudo_pass is undefined
+
+# Check whether directories exist
+
+-
+  name: Check temporary directory state
+  stat: path="{{ remote_tmp_dir }}"
+  register: temporary_dir
+
+-
+  name: Check Jenkins root directory state
+  stat: path="{{ jenkins_node_root_dir }}"
+  register: jenkins_root_dir
+  when: jenkins_node_root_dir is defined
+
+# Create directories if they don't exist
+
+-
+  name: Ensure temporary directory exists
+  file:
+    state: directory
+    path: "{{ remote_tmp_dir }}"
+    mode: 770
+  when: not temporary_dir.stat.exists
+
+-
+  name: Ensure Jenkins root directory exists
+  file:
+    state: directory
+    path: "{{ jenkins_node_root_dir }}"
+    mode: 770
+  when: not jenkins_root_dir.stat.exists
